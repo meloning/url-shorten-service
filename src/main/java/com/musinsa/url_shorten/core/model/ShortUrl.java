@@ -29,13 +29,13 @@ public class ShortUrl {
     }
 
     public ShortUrlEntity toEntity() {
-        ShortUrlEntity entity = new ShortUrlEntity();
-        entity.setId(this.id);
-        entity.setCode(this.code);
-        entity.setOriginalUrl(this.originalUrl);
-        entity.setRequestCount((this.requestCount == null) ? 0L : this.requestCount);
-        entity.setCreatedAt((this.createdAt == null) ? null : this.createdAt.toInstant());
-        entity.setUpdatedAt((this.updatedAt == null) ? null : this.updatedAt.toInstant());
-        return entity;
+        return ShortUrlEntity.builder()
+                .id(this.id)
+                .code(this.code)
+                .originalUrl(this.originalUrl)
+                .requestCount((this.requestCount == null) ? 0L : this.requestCount)
+                .createdAt((this.createdAt == null) ? null : this.createdAt.toInstant())
+                .updatedAt((this.updatedAt == null) ? null : this.updatedAt.toInstant())
+                .build();
     }
 }

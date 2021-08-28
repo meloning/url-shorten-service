@@ -3,14 +3,14 @@ package com.musinsa.url_shorten.infra.domain;
 import com.musinsa.url_shorten.core.model.ShortUrl;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.time.ZoneId;
 
 @Getter
-@Setter
+@SuperBuilder
 @NoArgsConstructor
 @Entity
 @Table(
@@ -43,9 +43,9 @@ public class ShortUrlEntity extends BaseEntity {
                 .id(this.id)
                 .code(this.code)
                 .originalUrl(this.originalUrl)
-                .requestCount(this.requestCount)
-                .createdAt((this.createdAt == null) ? null : this.createdAt.atZone(ZoneId.systemDefault()))
-                .updatedAt((this.updatedAt == null) ? null : this.updatedAt.atZone(ZoneId.systemDefault()))
+                .requestCount((this.requestCount == null) ? 0L : this.requestCount)
+                .createdAt((super.createdAt == null) ? null : super.createdAt.atZone(ZoneId.systemDefault()))
+                .updatedAt((super.updatedAt == null) ? null : super.updatedAt.atZone(ZoneId.systemDefault()))
                 .build();
     }
 }
