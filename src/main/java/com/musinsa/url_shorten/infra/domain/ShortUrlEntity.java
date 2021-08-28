@@ -17,20 +17,16 @@ import java.time.ZoneId;
         name = "ShortUrl",
         uniqueConstraints = {
                 @UniqueConstraint(
-                        name = "CODE_ORIGINAL_URL_UNIQUE",
-                        columnNames = {"code", "originalUrl"}
+                        name = "ORIGINAL_URL_UNIQUE",
+                        columnNames = {"originalUrl"}
                 )
-        },
-        indexes = @Index(name = "CODE_INDEX", columnList = "code")
+        }
 )
 @DynamicUpdate
 public class ShortUrlEntity extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(name = "code", nullable = false)
-    private String code;
 
     @Column(name = "originalUrl", nullable = false)
     private String originalUrl;
@@ -41,7 +37,6 @@ public class ShortUrlEntity extends BaseEntity {
     public ShortUrl toModel() {
         return ShortUrl.builder()
                 .id(this.id)
-                .code(this.code)
                 .originalUrl(this.originalUrl)
                 .requestCount((this.requestCount == null) ? 0L : this.requestCount)
                 .createdAt((super.createdAt == null) ? null : super.createdAt.atZone(ZoneId.systemDefault()))

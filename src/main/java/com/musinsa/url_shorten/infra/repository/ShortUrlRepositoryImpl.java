@@ -15,8 +15,8 @@ public class ShortUrlRepositoryImpl implements ShortUrlRepository {
     private final ShortUrlEntityRepository shortUrlEntityRepository;
 
     @Override
-    public Optional<ShortUrl> findByCode(String code) {
-        return shortUrlEntityRepository.findByCode(code).map(ShortUrlEntity::toModel);
+    public Optional<ShortUrl> findByOriginalUrl(String originalUrl) {
+        return shortUrlEntityRepository.findByOriginalUrl(originalUrl).map(ShortUrlEntity::toModel);
     }
 
     @Override

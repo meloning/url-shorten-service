@@ -6,5 +6,5 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.Optional;
 
 public interface ShortUrlEntityRepository extends CrudRepository<ShortUrlEntity, Long> {
-    Optional<ShortUrlEntity> findByCode(String code);
+    Optional<ShortUrlEntity> findByOriginalUrl(String originalUrl);
 }

@@ -14,8 +14,7 @@ public class ShortUrl {
     // primary key
     private Long id;
 
-    // unique constraint { code, originalUrl }
-    private String code;
+    // unique constraint { originalUrl }
     private String originalUrl;
 
     private Long requestCount;
@@ -31,7 +30,6 @@ public class ShortUrl {
     public ShortUrlEntity toEntity() {
         return ShortUrlEntity.builder()
                 .id(this.id)
-                .code(this.code)
                 .originalUrl(this.originalUrl)
                 .requestCount((this.requestCount == null) ? 0L : this.requestCount)
                 .createdAt((this.createdAt == null) ? null : this.createdAt.toInstant())
