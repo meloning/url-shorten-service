@@ -33,7 +33,6 @@ class ShortUrlRepositoryImplTest {
     public void save() {
         // given
         ShortUrl newShortUrl = ShortUrl.builder()
-                                .code("q1w2e3r4")
                                 .originalUrl("http://www.naver.com")
                                 .build();
         // when
@@ -41,7 +40,10 @@ class ShortUrlRepositoryImplTest {
 
         // then
         assertThat(createdShortUrl).isNotNull();
-        assertThat(createdShortUrl.getCode()).isEqualTo(newShortUrl.getCode());
+        assertThat(createdShortUrl.getId()).isNotZero();
         assertThat(createdShortUrl.getOriginalUrl()).isEqualTo(newShortUrl.getOriginalUrl());
+        assertThat(createdShortUrl.getRequestCount()).isZero();
+        assertThat(createdShortUrl.getCreatedAt()).isNotNull();
+        assertThat(createdShortUrl.getUpdatedAt()).isNotNull();
     }
 }
