@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class Base62UtilsTest {
 
     @ParameterizedTest
-    @ValueSource(ints = {1, 5, 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000})
+    @ValueSource(ints = {1, 5, 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000, 1000000000, Integer.MAX_VALUE})
     @DisplayName("Base62 방식의 인코딩 테스트")
     public void base62EncodingTest(int id) {
         String result = Base62Utils.encoding(id);
