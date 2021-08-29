@@ -19,7 +19,7 @@ import javax.validation.Valid;
 public class UrlApiController {
     private final CreateShortUrlUsecase createShortUrlUsecase;
 
-    @PostMapping("/shorten")
+    @PostMapping("/url:shorten")
     public ResponseEntity<?> shorten(@Valid @RequestBody OriginalUrlDto originalUrlDto, BindingResult bindingResult) {
         return ResponseEntity.ok(createShortUrlUsecase.execute(originalUrlDto.getUrl()));
     }
