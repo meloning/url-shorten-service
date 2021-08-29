@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class RestoreShortUrlUsecase {
     private final ShortUrlRepository shortUrlRepository;
 
-    @Transactional
+    @Transactional(readOnly = true)
     public String execute(String shortenedUrl) {
         Long id = Integer.valueOf(Base62Utils.decoding(shortenedUrl)).longValue();
         ShortUrl shortUrl = shortUrlRepository.findById(id)
