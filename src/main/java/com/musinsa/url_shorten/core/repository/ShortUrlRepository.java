@@ -6,6 +6,6 @@ import java.util.Optional;
 
 public interface ShortUrlRepository {
     Optional<ShortUrl> findByOriginalUrl(String originalUrl);
-
+    Optional<ShortUrl> findById(Long id);
     ShortUrl save(ShortUrl shortUrl);
 }
