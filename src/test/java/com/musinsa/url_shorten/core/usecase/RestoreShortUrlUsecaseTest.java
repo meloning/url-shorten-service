@@ -36,7 +36,7 @@ class RestoreShortUrlUsecaseTest {
         // when, then
         assertThatThrownBy(() -> restoreShortUrlUsecase.execute(testShortenUrl))
                 .isInstanceOf(NotFoundOriginalUrlException.class)
-                .hasMessageContaining(String.format("Not found originalUrl about %s", testShortenUrl));
+                .hasMessageContaining(String.format("Not found originalUrl about '%s'", testShortenUrl));
     }
 
 }
