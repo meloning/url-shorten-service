@@ -2,14 +2,17 @@ package com.musinsa.url_shorten.boundaries.api.controller;
 
 
 import com.musinsa.url_shorten.boundaries.api.dto.OriginalUrlDto;
+import com.musinsa.url_shorten.boundaries.api.dto.ShortenUrlDto;
 import com.musinsa.url_shorten.core.usecase.CreateShortUrlUsecase;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 
@@ -21,6 +24,10 @@ public class UrlApiController {
 
     @PostMapping("/url:shorten")
     public ResponseEntity<?> shorten(@Valid @RequestBody OriginalUrlDto originalUrlDto, BindingResult bindingResult) {
-        return ResponseEntity.ok(createShortUrlUsecase.execute(originalUrlDto.getUrl()));
+        String uriPath = createShortUrlUsecase.execute(originalUrlDto.getUrl());
+        String fullUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path(uriPath)
+                .toUriString();
+        return new ResponseEntity<>(ShortenUrlDto.builder().shortenUrl(fullUri).build(), HttpStatus.CREATED);
     }
 }

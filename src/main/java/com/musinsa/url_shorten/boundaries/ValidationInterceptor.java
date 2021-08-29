@@ -1,5 +1,6 @@
 package com.musinsa.url_shorten.boundaries;
 
+import com.musinsa.url_shorten.boundaries.api.ErrorResponse;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -26,7 +27,13 @@ public class ValidationInterceptor {
                     for (FieldError error : bindingResult.getFieldErrors()) {
                         errors.put(error.getField(), error.getDefaultMessage());
                     }
-                    return ResponseEntity.badRequest().body(errors);
+                    return ResponseEntity.badRequest().body(
+                            ErrorResponse.<Map<String, String>>builder()
+                                .code("invalid_parameter")
+                                .message("The requester's parameter is malformed.")
+                                .errors(errors)
+                                .build()
+                    );
                 }
             }
         }
