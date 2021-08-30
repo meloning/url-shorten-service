@@ -25,7 +25,8 @@ import java.time.ZoneId;
 @DynamicUpdate
 public class ShortUrlEntity extends BaseEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "SHORT_URL_SEQ_GEN", sequenceName = "SEQ_SHORT_URL_ID", initialValue = 10000, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SHORT_URL_SEQ_GEN")
     private Long id;
 
     @Column(name = "originalUrl", nullable = false)

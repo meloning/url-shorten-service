@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Url Shorten Service</title>
+</head>
+<body>
+
+URL: <input type="text" id="originalUrl"><button type="button" onclick="callShortenUrl()">generate</button>
+</br>
+Generated Shorten URL: <a href="#" id="shortenedUrl" target="_blank"></a>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+    function callShortenUrl() {
+        const requestData = {
+            url: $('#originalUrl').val()
+        }
+        $.ajax({
+            method: 'POST',
+            url: '/v1/url:shorten',
+            data: JSON.stringify(requestData),
+            contentType: 'application/json',
+            dataType: 'json',
+            async: false
+        }).done(function(data) {
+            console.log(data);
+
+            if (data == null) {
+                alert('Failed url shortening.');
+                return;
+            }
+
+            $('#shortenedUrl').prop('href', data.shortenUrl);
+            $('#shortenedUrl').text(data.shortenUrl);
+        });
+    }
+</script>
+
+</body>
+</html>

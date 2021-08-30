@@ -9,6 +9,10 @@ spring:
   output:
     ansi:
       enabled: always
+  thymeleaf:
+    prefix: classpath:templates/
+    suffix: .html
+    cache: false
   h2:
     console:
       enabled: true
