@@ -20,8 +20,6 @@ public class CreateShortUrlUsecase {
         Optional<ShortUrl> shortUrlOptional = shortUrlRepository.findByOriginalUrl(originalUrl);
         if (shortUrlOptional.isPresent()) {
             ShortUrl shortUrl = shortUrlOptional.get();
-            shortUrl.incrementRequest();
-            shortUrlRepository.save(shortUrl);
             return File.separator + Base62Utils.encoding(shortUrl.getId().intValue());
         }
 

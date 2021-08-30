@@ -14,11 +14,13 @@ import org.springframework.transaction.annotation.Transactional;
 public class RestoreShortUrlUsecase {
     private final ShortUrlRepository shortUrlRepository;
 
-    @Transactional(readOnly = true)
+    @Transactional
     public String execute(String shortenedUrl) {
         Long id = Integer.valueOf(Base62Utils.decoding(shortenedUrl)).longValue();
         ShortUrl shortUrl = shortUrlRepository.findById(id)
                 .orElseThrow(() -> new NotFoundOriginalUrlException(HttpStatus.BAD_REQUEST, String.format("Not found originalUrl about '%s'", shortenedUrl)));
+        shortUrl.incrementRequest();
+        shortUrlRepository.save(shortUrl);
 
         return shortUrl.getOriginalUrl();
     }
