@@ -10,6 +10,7 @@ import java.time.ZonedDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class ShortUrl {
     // primary key
     private Long id;

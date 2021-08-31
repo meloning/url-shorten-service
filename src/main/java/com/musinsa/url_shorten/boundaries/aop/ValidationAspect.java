@@ -1,6 +1,7 @@
-package com.musinsa.url_shorten.boundaries;
+package com.musinsa.url_shorten.boundaries.aop;
 
 import com.musinsa.url_shorten.boundaries.api.ErrorResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -12,9 +13,10 @@ import org.springframework.validation.FieldError;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+@Slf4j
 @Aspect
 @Component
-public class ValidationInterceptor {
+public class ValidationAspect {
 
     @Around("execution(* com.musinsa.url_shorten.boundaries.api.controller.*.*(..))")
     public Object validAop(ProceedingJoinPoint joinPoint) throws Throwable {
@@ -27,6 +29,7 @@ public class ValidationInterceptor {
                     for (FieldError error : bindingResult.getFieldErrors()) {
                         errors.put(error.getField(), error.getDefaultMessage());
                     }
+                    log.error("{}", errors);
                     return ResponseEntity.badRequest().body(
                             ErrorResponse.<Map<String, String>>builder()
                                 .code("invalid_parameter")

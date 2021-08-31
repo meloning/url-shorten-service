@@ -5,10 +5,12 @@ import com.musinsa.url_shorten.core.model.ShortUrl;
 import com.musinsa.url_shorten.core.repository.ShortUrlRepository;
 import com.musinsa.url_shorten.util.Base62Utils;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+@Slf4j
 @RequiredArgsConstructor
 @Component
 public class RestoreShortUrlUsecase {
@@ -21,6 +23,7 @@ public class RestoreShortUrlUsecase {
                 .orElseThrow(() -> new NotFoundOriginalUrlException(HttpStatus.BAD_REQUEST, String.format("Not found originalUrl about '%s'", shortenedUrl)));
         shortUrl.incrementRequest();
         shortUrlRepository.save(shortUrl);
+        log.info("{}", shortUrl);
 
         return shortUrl.getOriginalUrl();
     }

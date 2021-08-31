@@ -1,0 +1,10 @@
+server:
+  # X-Forwarded-For Header가 존재할 경우 적용 => ServletUriComponentsBuilder.fromCurrentContextPath()
+  forward-headers-strategy: native
+
+spring:
+  config:
+    use-legacy-processing: true # allow "application-{profile}.yml" way
+  output:
+    ansi:
+      enabled: always

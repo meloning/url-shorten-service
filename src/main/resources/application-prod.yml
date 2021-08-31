@@ -27,12 +27,7 @@ spring:
 
 logging:
   file:
-    path: ./logs/local
+    path: ./logs/prod
   level:
     root: info
-    org:
-      hibernate:
-        type:
-          descriptor:
-            sql: trace
-  config: classpath:log4j2-spring-local.xml
+  config: classpath:log4j2-spring-prod.xml
