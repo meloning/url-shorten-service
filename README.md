@@ -8,3 +8,8 @@ $ cd url-shorten-service
 $ ./gradlew build
 $ java -jar build/libs/url-shorten-0.0.1-SNAPSHOT.jar --spring.profiles.active=prod
 ```
+
+# Spec
+- db: h2
+- language: java8
+- spring boot: 2.4
