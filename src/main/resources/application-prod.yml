@@ -30,4 +30,9 @@ logging:
     path: ./logs/prod
   level:
     root: info
+    org:
+      hibernate:
+        type:
+          descriptor:
+            sql: info
   config: classpath:log4j2-spring-prod.xml
