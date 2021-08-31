@@ -21,7 +21,7 @@ public class UrlController {
         return "index";
     }
 
-    @GetMapping("{shortened-url:^[a-zA-Z0-9]{3,7}$}")
+    @GetMapping("{shortened-url:^[a-zA-Z0-9]{3,8}$}")
     public void restore(@PathVariable("shortened-url") String shortenedUrl, HttpServletResponse response) throws IOException {
         String originalUrl = restoreShortUrlUsecase.execute(shortenedUrl);
         log.info("{}", originalUrl);
