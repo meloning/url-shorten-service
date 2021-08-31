@@ -33,6 +33,8 @@ Generated Shorten URL: <a href="#" id="shortenedUrl" target="_blank"></a>
 
             $('#shortenedUrl').prop('href', data.shortenUrl);
             $('#shortenedUrl').text(data.shortenUrl);
+        }).fail(function(data, textStatus, errorThrown){
+            alert(data.responseJSON.errors.url);
         });
     }
 </script>
